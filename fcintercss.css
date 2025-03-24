@@ -1,0 +1,357 @@
+body {
+    font-family: 'Rubik', sans-serif;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+    background-color: #ffffff; 
+}
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: linear-gradient(to right, #22069e, rgb(1, 12, 43));
+    padding: 10px 30px;
+}
+
+.logo {
+    color: white;
+    font-size: 24px;
+    font-weight: bold;
+}
+.logo img{
+    width: 50px;
+    height:35px;
+    margin-right: 5px;;
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    position: relative;
+    right: 40%;
+}
+
+.nav-links li {
+    margin: 0 10px;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: white;
+    padding: 8px 12px;
+    transition: 0.3s;
+}
+
+.nav-links a:hover {
+    background: #555;
+    border-radius: 5px;
+}
+
+.kit img{
+    position: absolute;
+    left: 10%;
+    top: 15%;
+    border-color: black;
+    box-shadow: 0 0 1px 3px rgb(61, 61, 61);
+    width: 600px;
+    height: 600px;
+}
+.kit h1{
+    position: absolute;
+    left: 62%;
+    top: 12%;
+    color: black;
+    font-size: 30px;
+    font-weight: bold;
+}
+.kit h2{
+    position: absolute;
+    left: 64%;
+    top: 17%;
+    color: rgb(48, 47, 47);
+    font-size: 17px;
+    font-weight: bold;
+}
+.kit h3{
+    position: absolute;
+    left: 70%;
+    top: 20%;
+    color: rgb(0, 0, 0);
+    font-size: 25px;
+    font-weight: bold;
+}
+
+.line{
+    position: absolute;
+    display: block;
+    top: 4%;
+    width: 35%;
+    left: 55%;
+    height: 10px;
+    border: 0;
+    border-top: 1px solid #0a0a0ad8;
+    margin: 220px 0;
+    padding: 0;
+}
+.line2{
+    position: absolute;
+    display: block;
+    top: 40%;
+    width: 35%;
+    left: 55%;
+    height: 10px;
+    border: 0;
+    border-top: 1px solid #0a0a0ad8;
+    margin: 220px 0;
+    padding: 0;
+}
+
+.desc h2{
+    position: absolute;
+    left: 5%;
+    top: 80%;
+    color: rgb(0, 0, 0);
+    font-size: 30px;
+    margin: 10px;
+}
+.desc ul{
+    position: absolute;
+    left: 43%;
+    top: 60%;
+    color: rgb(0, 0, 0);
+    font-size: 16px;
+    margin: 10px;
+}
+#benefits {
+    position:absolute;
+    top: 85%;
+    left: 5%;
+    list-style-type: none; 
+    padding-left: 20px;    
+    border: 2px solid #ccc;
+    border-radius: 8px;   
+    background-color: #f9f9f9; 
+    width: fit-content;   
+    max-width: 800px;    
+    margin: 20px auto;   
+    padding: 20px;        
+}
+
+#benefits li {
+    font-size: 16px;
+    color: #333; 
+    margin-bottom: 10px; 
+}
+
+.desc #h22{
+    position: absolute;
+    left: 5%;
+    top: 100%;
+    color: rgb(0, 0, 0);
+    font-size: 30px;
+    margin: 10px;
+}
+  .desc #details{
+    position:absolute;
+    top: 105%;
+    margin: 5px;
+    left: 19%;
+    list-style-type: none; 
+    padding-left: 20px;    
+    border: 2px solid #ccc;
+    border-radius: 8px;   
+    background-color: #f9f9f9; 
+    width: fit-content;   
+    max-width: 800px;    
+    margin: 20px auto;   
+    padding: 20px;    
+}
+
+.size {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 20px;
+  }
+
+  .kit p{
+    position: absolute;
+    left: 58%;
+    top: 28%;
+    color: rgba(0, 0, 0, 0.801);
+    font-size: 22px;
+    font-weight: bold;
+   }
+  
+  .size-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 45px;
+    height: 45px;
+    border: 2px solid #ccc;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+    color: #333;
+    background-color: #f9f9f9;
+    transition: background-color 0.3s, transform 0.3s;
+    position: relative;
+    top: 190px;
+    left: 620px;
+
+  }
+  
+  .size-button:hover {
+    background-color: #e0e0e0;
+    transform: scale(1.1);
+  }
+  
+  .size-button.selected {
+    background-color: #4CAF50;
+    color: white;
+  }
+
+  .dropdown {
+    margin: 20px;
+}
+.dropdown p{
+    position: absolute;
+    left: 57%;
+    top: 36%;
+    color: rgba(0, 0, 0, 0.801);
+    font-size: 22px;
+    font-weight: bold;
+}
+    select {
+    font-size: 18px;
+    padding: 10px;
+    border: 2px solid #ccc;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    position: relative;
+    top: 200px;
+    left: 620px;
+
+}
+#badges{
+    position: absolute;
+    top: 46%;
+    left: 74.5%;
+}
+.dropdown-badges p{
+    position: absolute;
+    left: 54%;
+    top: 45%;
+    color: rgba(0, 0, 0, 0.801);
+    font-size: 20px;
+    font-weight: bold;
+}
+select:hover {
+    background-color: #e0e0e0;
+}
+
+#total-price {
+    font-size: 20px;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 100px;
+    position: absolute;
+    top: 55%;
+}
+
+.add-to-cart {
+    position: absolute;
+    top: 58%;
+    left: 85%;
+    transform: translate(-50%, -50%);
+    background-color: #4CAF50;
+    color: white;
+    font-size: 18px;
+    font-weight: bold;
+    border: none;
+    border-radius: 10px;
+    padding: 15px 20px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    width: 170px;
+    text-align: center;
+}
+
+.add-to-cart:hover {
+    background-color: #45a049;
+    transform: translate(-50%, -50%) scale(1.05); 
+}
+
+.add-to-cart:active {
+    transform: translate(-50%, -50%) scale(0.95); 
+}
+
+.icon-cart i{
+    position: absolute;
+    top: 27px;
+    right: 15%;
+    font-size: 20px;
+    width: 50px;
+    height: 50px;
+    color: rgba(11, 187, 78, 0.89);
+}
+
+.forms-container{
+    position: absolute;
+    width: 80%;
+    right: 10%;
+    top: 65%;
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 10px;
+    clear: both;
+}
+
+.purchase-form{
+    background-color: #f9f9f9;
+    border: 2px solid #ccc;
+    border-radius: 8px;
+    padding: 25px;
+    margin-bottom: 40px;
+}
+
+.purchase-form h2{
+    text-align: left;
+    margin-bottom: 20px;
+    color: #000;
+    font-size: 24px;
+}
+.form-group{
+    margin-bottom: 15px;
+    text-align: left;
+}
+.form-group label{
+    display: block;
+    margin-bottom: 5px;
+    font-weight: 500;
+}
+.form-group input, .form-group textarea{
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    
+}
+.form-submit{
+    background-color: #4CAF50;
+    color: white;
+    border:none;
+    border-radius: 5px;
+    padding: 12px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+.form-submit:hover {
+    background-color: #45a049;
+  }
