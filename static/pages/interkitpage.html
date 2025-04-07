@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="en-US">
+  <head>
+    <link rel="icon" href="images/titlelogo.png" type="images/icon type">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
+    <script src="https://kit.fontawesome.com/0db3688881.js" crossorigin="anonymous"></script>
+    <title>QuickEquip - Your Football Store</title>
+    <link rel = "stylesheet" href = "/style/fcintercss.css" />
+  </head>
+  <body>
+    <nav class="navbar">
+        <div class="logo">
+            <img src="/images/titlelogo.png" alt="QuickEquip Logo">
+            <span>QuickEquip</span>
+        </div>
+        <div class = "icon-cart">
+          <a href="cart.html"><i class="fas fa-shopping-cart">
+            <span>0</span>
+          </i></a>
+        </div>
+        <ul class="nav-links">
+            <li><a href="mainPage.html">Home</a></li>
+            <li><a href="kits.html">Kits 24/25</a></li>
+            <li><a href="boots.html">Boots</a></li>
+            <li><a href="other.html">Other</a></li>
+        </ul>
+    </nav>
+
+    <div class = "container">
+      <div class = "line"></div>
+      <div class = "line2"></div>
+      <div class = "kit">
+        <img src = "/images/interkit.png">
+        <h1>FC Inter Milan Kit 2024/25</h1>
+        <h2>Men's Nike Dri-Fit Football Replica Shirt</h2>
+        <h3 id = "base-price">99.99$</h3>
+        <p id = "total-price">Total Price: <span id = "total-price">99.99$</span></p>
+        <p>Select Size</p>
+      </div>
+      <div class="desc">
+        <h2>Benefits</h2>
+        <ul id = "benefits">
+          <li>Nike Dri-FIT technology moves sweat away from your skin for quicker evaporation, helping you stay dry and comfortable.</li>
+          <li>The replica design gives you details modeled after what the team wears.</li>
+        </ul>
+      
+        <h2 id = "h22">Product details</h2>
+        <ul id = "details">
+          <li>100% polyester</li>
+          <li>Machine wash</li>
+          <li>Imported</li>
+          <li>Country/Region of Origin: Thailand</li>
+        </ul>
+      </div>
+      <div class = "size">
+        <div class="size-button" onclick="selectSize('S')">S</div>
+        <div class="size-button" onclick="selectSize('M')">M</div>
+        <div class="size-button" onclick="selectSize('L')">L</div>
+        <div class="size-button" onclick="selectSize('XL')">XL</div>
+    </div>
+
+    <div class = "dropdown">
+      <p>Player (Optional)</p>
+      <select id = "playerNumber" name = "playerNumber">
+            <option value = "0" selected>Select Player</option>
+            <option value="10">Player 10 - L.Martinez (+$10)</option>
+            <option value="10">Player 23 - N.Barella (+$10)</option>
+            <option value="10">Player 9 - M.Thuram (+$10)</option>
+            <option value="10">Player 20 - Çalhanoğlu (+$10)</option>
+            <option value="10">Player 2 - D.Dumfries (+$10)</option>
+      </select>
+    </div>
+
+    <div class = "dropdown-badges">
+      <p>Competition and Sponsor badges</p>
+      <select id = "badges" name = "badges">
+            <option value = "0" selected>Competition and Sponsor badges</option>
+            <option value="10">Yes(+$10)</option>
+            <option value="No">No</option>
+      </select>
+    </div>
+
+    <button class="add-to-cart">Add to Cart</button>
+    <div class="forms-container">
+      <div class="purchase-form">
+        <h2>Purchase Form</h2>
+        <form id="purchase-form">
+          <div class="form-group">
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" required>
+          </div>
+          
+          <div class="form-group">
+            <label for="address">Address</label>
+            <textarea id="address" name="address" rows="3" required></textarea>
+          </div>
+          
+          <button type="submit" class="form-submit">Send</button>
+        </form>
+      </div>
+    <script src = "/script/products.js"></script>
+    <script src = "/script/cart.js"></script>
+    </body>
+</html>

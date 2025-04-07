@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en-US">
+  <head>
+    <%- include ('./modules/header') %>
+  </head>
+  <body>
+    <%- include('./modules/nav') %>
+
+    <div class = "product-container">
+      <% if (kits && kits.length > 0) { %>
+        <% kits.forEach(kit => { %>
+          <a href = "/product/kits/<%= kit.slug %>">
+            <div>
+                <h1><%= kit.name %></h1>
+                <img src="<%= kit.imageUrl %>" alt="<%= kit.name %>">
+                <p><strong><%= kit.description %></strong></p>
+                <p>$<%= kit.price %></p>
+            </div>
+        <% }) %>
+    <% } else { %>
+        <p>No kits available.</p>
+    <% } %>
+    </div>
+
+  </body>
+</html>

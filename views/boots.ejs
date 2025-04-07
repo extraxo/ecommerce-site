@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en-US">
+  <head>
+    <%- include ('./modules/header') %>
+  </head>
+  <body>
+    <%- include ('./modules/nav') %>
+
+    <div class = "product-container">
+      <% if (boots && boots.length > 0) { %>
+        <% boots.forEach(boot => { %>
+          <a href = "/product/boots/<%= boot.slug %>">
+            <div>
+                <h1><%= boot.name %></h1>
+                <img src="<%= boot.imageUrl %>" alt="<%= boot.name %>">
+                <p><%= boot.description %></p>
+                <p>Price: $<%= boot.price %></p>
+            </div>
+        <% }) %>
+    <% } else { %>
+        <p>No boots available.</p>
+    <% } %>
+    </div>
+</body>
+
+</html>

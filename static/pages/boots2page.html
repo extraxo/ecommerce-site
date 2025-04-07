@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en-US">
+  <head>
+    <link rel="icon" href="images/titlelogo.png" type="images/icon type">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
+    <script src="https://kit.fontawesome.com/0db3688881.js" crossorigin="anonymous"></script>
+    <title>QuickEquip - Your Football Store</title>
+    <link rel = "stylesheet" href = "/style/boots2.css" />
+  </head>
+  <body>
+    <nav class="navbar">
+        <div class="logo">
+            <img src="/images/titlelogo.png" alt="QuickEquip Logo">
+            <span>QuickEquip</span>
+        </div>
+        <div class = "icon-cart">
+          <a href="cart.html"><i class="fas fa-shopping-cart">
+            <span>0</span>
+          </i></a>
+        </div>
+        <ul class="nav-links">
+            <li><a href="mainPage.html">Home</a></li>
+            <li><a href="kits.html">Kits 24/25</a></li>
+            <li><a href="boots.html">Boots</a></li>
+            <li><a href="other.html">Other</a></li>
+        </ul>
+    </nav>
+
+    <div class = "container">
+      <div class = "line"></div>
+      <div class = "line2"></div>
+      <div class = "kit">
+        <img src = "/images/f50.avif">
+        <h1>Adidas F50 Elite Firm Ground Cleats</h1>
+        <h2>MG High-Top Football Boot</h2>
+        <h3 id = "base-price">159.99$</h3>
+        <p id = "total-price">Total Price: <span id = "total-price">159.99$</span></p>
+        <p>Select Size</p>
+      </div>
+      <div class="desc">
+        <h2>Benefits</h2>
+        <ul id = "benefits">
+          <li>Push your pace to the limit in lightweight adidas F50 footwear engineered for speed. Standing out with an eye-catching Sprintgrid print, the Fiberskin upper on these League soccer cleats employs an adaptive laceless collar for solid lockdown and clean striking.</li>
+          <li>Turn them over and you'll find a Sprintplate 360 outsole that delivers extra zip on firm ground and artificial grass surfaces.</li>
+        </ul>
+      
+        <h2 id = "h22">Product details</h2>
+        <ul id = "details">
+          <li>This product features at least 20% recycled materials. By reusing materials that have already been created, we help to reduce waste and our reliance on finite resources and reduce the footprint of the products we make.</li>
+        </ul>
+      </div>
+      <div class = "size">
+        <div class="size-button" onclick="selectSize('42')">42</div>
+        <div class="size-button" onclick="selectSize('43')">43</div>
+        <div class="size-button" onclick="selectSize('44')">44</div>
+        <div class="size-button" onclick="selectSize('45')">45</div>
+    </div>
+
+    <button class="add-to-cart">Add to Cart</button>
+    <div class="forms-container">
+      <div class="purchase-form">
+        <h2>Purchase Form</h2>
+        <form id="purchase-form">
+          <div class="form-group">
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" required>
+          </div>
+          
+          <div class="form-group">
+            <label for="address">Address</label>
+            <textarea id="address" name="address" rows="3" required></textarea>
+          </div>
+          
+          <button type="submit" class="form-submit">Send</button>
+        </form>
+      </div>
+    <script src = "products.js"></script>
+    <script src = "cart.js"></script>
+    </body>
+</html>

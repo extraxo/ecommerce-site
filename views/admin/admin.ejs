@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin Panel</title>
+    <link rel="stylesheet" href="/static/style/mpstyle.css">
+</head>
+<body>
+    <h1>Admin Panel</h1>
+
+    <div class="admin-container">
+        <div class="add-item-form">
+            <h2>Add New Product</h2>
+            <form action="/admin/newproduct" method="POST">
+                <input type="text" name="name" placeholder="Product Name" required>
+                <input type="text" name="slug" placeholder="Slug (e.g. nikemercurial)" required>
+                <input type="text" name="imageUrl" placeholder="Image URL" required>
+                <input type="text" name="description" placeholder="Short Description" required>
+                <input type="number" name="price" placeholder="Price" required>
+                <select name="category" required>
+                    <option value="kits">Kit</option>
+                    <option value="boots">Boots</option>
+                    <option value="other">Other</option>
+                </select>
+                <button type="submit">Add Product</button>
+            </form>
+        </div>
+
+        <div class="items-container">
+            <h2>All Products</h2>
+            <% products.forEach(product => { %>
+                <div class="product">
+                    <h3><%= product.name %></h3>
+                    <p><%= product.description %></p>
+                    <p>$<%= product.price %></p>
+                </div>
+            <% }) %>
+        </div>
+    </div>
+</body>
+</html>
