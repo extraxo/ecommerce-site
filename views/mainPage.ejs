@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en-US">
+  <head>
+   <%- include('./modules/header') %>
+  </head>
+  <body>
+    <%- include('./modules/nav') %>
+    <%- include('./modules/carrusel') %>
+  
+  <div class="dots">
+    <span class="dot"></span>
+    <span class="dot"></span>
+    <span class="dot"></span>
+    <span class="activedot"></span>
+  </div>
+  
+  <div class="product-container">
+
+    <% if (allkits && allkits.length > 0) { %>
+      <% allkits.forEach(kit => { %>
+        <a href="/product/kits/<%= kit.slug %>">
+          <div>
+            <h1><%= kit.name %></h1>
+            <img src="<%= kit.image %>" alt="<%= kit.name %>">
+            <p><%= kit.description %></p>
+            <p>Price: $<%= kit.price %></p>
+          </div>
+        </a>
+      <% }) %>
+    <% } else { %>
+      <p>No kits available.</p>
+    <% } %>
+  
+    <% if (allboots && allboots.length > 0) { %>
+      <% allboots.forEach(boot => { %>
+        <a href="/product/boots/<%= boot.slug %>">
+          <div>
+            <h1><%= boot.name %></h1>
+            <img src="<%= boot.image %>" alt="<%= boot.name %>">
+            <p><%= boot.description %></p>
+            <p>Price: $<%= boot.price %></p>
+          </div>
+        </a>
+      <% }) %>
+    <% } else { %>
+      <p>No boots available.</p>
+    <% } %>
+  
+    <% if (allothers && allothers.length > 0) { %>
+      <% allothers.forEach(other => { %>
+        <a href="/product/other/<%= other.slug %>">
+          <div>
+            <h1><%= other.name %></h1>
+            <img src="<%= other.image %>" alt="<%= other.name %>">
+            <p><%= other.description %></p>
+            <p>Price: $<%= other.price %></p>
+          </div>
+        </a>
+      <% }) %>
+    <% } else { %>
+      <p>No other products available.</p>
+    <% } %>
+  
+  </div>
+  <script src = "/script/mpscript.js"></script>
+  <script src="/script/cart.js"></script>
+</body>
+</html>

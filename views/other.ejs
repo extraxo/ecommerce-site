@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="en-US">
+  <head>
+    <%- include ('./modules/header') %>
+  </head>
+  <body>
+    <%- include ('./modules/nav') %>
+<body>
+  <div class = "product-container">
+    <% if (others && others.length > 0) { %>
+      <% others.forEach(other => { %>
+        <a href = "/product/other/<%= other.slug %>">
+          <div>
+              <h1><%= other.name %></h1>
+              <img src="<%= other.imageUrl %>" alt="<%= other.name %>">
+              <p><%= other.description %></p>
+              <p>Price: $<%= other.price %></p>
+          </div>
+      <% }) %>
+  <% } else { %>
+      <p>No others available.</p>
+  <% } %>
+  </div>
+</body>
+</html>

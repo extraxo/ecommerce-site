@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel - Online Book Store</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <h1>Admin Panel</h1>
+    
+    <div class="admin-container">
+        <!-- Add New Item Form -->
+        <div class="add-item-form">
+            <h2>Add New Product</h2>
+            <form id="addItemForm">
+                <input type="text" id="title" name="title" placeholder="Book Title" required>
+                <input type="text" id="author" name="author" placeholder="Author" required>
+                <input type="number" id="price" name="price" step="0.01" placeholder="Price" required>
+                <input type="text" id="image" name="image" placeholder="Image URL" required>
+                <textarea id="shortDescription" name="shortDescription" placeholder="Short Description (max 100 characters)" required maxlength="100"></textarea>
+                <textarea id="fullDescription" name="fullDescription" placeholder="Full Description" required></textarea>
+                <input type="submit" value="Add Book">
+            </form>
+        </div>
+
+        <!-- Existing Items Display -->
+        <div class="items-container">
+            <h2>Existing Books</h2>
+            <div id="itemsList"></div>
+            <!-- Error message will be shown here if needed -->
+         </div>
+    </div>
+
+    <script src="/static/script/admin.js"></script>
+</body>
+</html>
