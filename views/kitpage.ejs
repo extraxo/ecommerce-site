@@ -1,16 +1,7 @@
 <!doctype html>
 <html lang="en-US">
   <head>
-    <link rel="icon" href="images/titlelogo.png" type="images/icon type">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width" />
-    <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
-    <script src="https://kit.fontawesome.com/0db3688881.js" crossorigin="anonymous"></script>
-    <title><%= kit.name%> | QuickEquip</title>
-    <link rel = "stylesheet" href = "/style/fcbkitcss.css" />
+    <%- include ('./modules/detailedheader') %>
   </head>
   <body>
     <%- include ('./modules/nav') %>
@@ -68,27 +59,52 @@
       </select>
     </div>
 
-    <button class="add-to-cart">Add to Cart</button>
-
+    <button class="add-to-cart" 
+    onclick="addToCart('<%= kit._id %>', '<%= kit.name %>', '<%= kit.price %>')">
+    Add to Cart
+  </button>
     <div class="forms-container">
-      <div class="purchase-form">
-        <h2>Purchase Form</h2>
-        <form id="purchase-form">
-          <div class="form-group">
-            <label for="name">Name:</label>
-            <input type="text" id="name" name="name" required>
-          </div>
-          
-          <div class="form-group">
-            <label for="address">Address</label>
-            <textarea id="address" name="address" rows="3" required></textarea>
-          </div>
-          
-          <button type="submit" class="form-submit">Send</button>
+
+      <div class="review-container"> 
+        <h4>Leave a quick review:</h4>
+        <form id="review-form" data-kit-slug="<%= kit.slug %>">
+            <div class="form-inline"> 
+                <label for="review-name">Name:</label>
+                <input type="text" id="review-name" name="name">
+                <label for="review-rating">Rating (1-5):</label>
+                <input type="number" id="review-rating" name="rating" min="1" max="5">
+            </div>
+            <div class="form-group">
+                <label for="review-comment">Comment:</label><br>
+                <textarea id="review-comment" name="comment" rows="3" ></textarea>
+            </div>
+            <button type="submit" class="form-submit">Post Review</button>
+            <div id="review-form-message" class="form-message"></div> 
         </form>
-      </div>
+    </div>
+    <div class = "post-review-container">
+        <h4>Reviews:</h4>
+         <hr>
+        <div class ="reviews-list">
+            <% if (kit.reviews && kit.reviews.length > 0) { %>
+                <% kit.reviews.slice().reverse().forEach(review => { %>
+                    <div class="review-item" id="review-<%= review._id %>">
+                        <p><strong><%= review.name %></strong> - Rating: <%= review.rating %>/5</p>
+                        <p class="review-comment"><%= review.comment %></p>
+                        <p class="review-date">
+                            <small>Reviewed on: <%= new Date(review.createdAt).toLocaleDateString('bg-BG') %></small>
+                        </p>
+                    </div>
+                     <hr>
+                <% }); %>
+            <% } else { %>
+                <p id="no-reviews-message">No reviews yet.</p>
+            <% } %>
+        </div>
+    </div>
       
       <script src = "/script/pricechanges.js"></script>
       <script src = "/script/cart.js"></script>
+      <script src = /script/reviews.js></script>
     </body>
 </html>
