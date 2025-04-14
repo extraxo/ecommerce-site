@@ -1,0 +1,53 @@
+<!DOCTYPE html> 
+<html lang="en"> 
+<head>   
+  <%- include ('./modules/header')%> 
+</head> 
+<body>     
+  <%- include ('./modules/nav') %>        
+  <h1>Your Shopping Cart</h1>
+<div id="cart-items"></div>
+<h2>Total: <span id="total-price">0</span> BGN</h2>
+
+<form id="order-form">
+    <h2>Your Details</h2> <%# Optional: Added heading %>
+
+    <div class="form-group"> <%# Optional: Added wrapper div %>
+        <label for="customer-name">First Name:</label> <%# Optional: Added label %>
+        <input type="text"
+               name="name"
+               id="customer-name" <%# ADD THIS ID %>
+               placeholder="First Name" required>
+    </div>
+
+    <div class="form-group"> <%# Optional: Added wrapper div %>
+       <label for="customer-surname">Last Name:</label> <%# Optional: Added label %>
+       <input type="text"
+              name="surname"
+              id="customer-surname" <%# ADD THIS ID %>
+              placeholder="Last Name" required>
+    </div>
+
+     <div class="form-group"> <%# Optional: Added wrapper div %>
+        <label for="customer-email">Email:</label> <%# Optional: Added label %>
+        <input type="email" <%# Changed type to email for better validation %>
+               name="email"
+               id="customer-email" <%# ADD THIS ID %>
+               placeholder="Email" required>
+    </div>
+
+    <div class="form-group"> <%# Optional: Added wrapper div %>
+        <label for="customer-address">Address:</label> <%# Optional: Added label %>
+        <textarea name="address" <%# Changed to textarea for address %>
+                  id="customer-address" <%# ADD THIS ID %>
+                  placeholder="Address" rows="3" required></textarea>
+    </div>
+
+    <div id="order-message" style="margin-top: 10px; font-weight: bold;"></div>
+
+    <button type="submit" id="submit-order-button">Finish Order</button> <%# Optional: Added ID to button %>
+</form>
+<script src="/script/cart.js"></script>
+<script src="/script/cartDisplay.js"></script>
+</body> 
+</html>

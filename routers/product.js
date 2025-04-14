@@ -27,7 +27,7 @@ router.get("/boots/:bootSlug", async (req, res) => {
             return res.status(404).send("Boot not found");
         }
 
-        res.render("bootpage", { boot });
+        res.render("bootspage", { boot });
     } catch (err) {
         console.error(err);
         res.status(500).send("Server error");

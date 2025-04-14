@@ -2,36 +2,78 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Panel - Online Book Store</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>Admin Panel</title>
+    <link rel="stylesheet" href="/static/style/mpstyle.css">
+    <style>
+        .category-fields { display: none; margin-top: 10px; }
+    </style>
 </head>
 <body>
     <h1>Admin Panel</h1>
-    
+
     <div class="admin-container">
-        <!-- Add New Item Form -->
         <div class="add-item-form">
             <h2>Add New Product</h2>
-            <form id="addItemForm">
-                <input type="text" id="title" name="title" placeholder="Book Title" required>
-                <input type="text" id="author" name="author" placeholder="Author" required>
-                <input type="number" id="price" name="price" step="0.01" placeholder="Price" required>
-                <input type="text" id="image" name="image" placeholder="Image URL" required>
-                <textarea id="shortDescription" name="shortDescription" placeholder="Short Description (max 100 characters)" required maxlength="100"></textarea>
-                <textarea id="fullDescription" name="fullDescription" placeholder="Full Description" required></textarea>
-                <input type="submit" value="Add Book">
+            <form id="addItemForm" action="/admin/newproduct" method="POST">
+                <input type="text" name="name" placeholder="Product Name" required>
+                <input type="text" name="slug" placeholder="Slug (e.g. nikemercurial)" required>
+                <input type="text" name="imageUrl" placeholder="Image URL" required>
+                <input type="text" name="description" placeholder="Short Description" required>
+                <input type="number" name="price" placeholder="Price" required>
+
+                <select name="category" id="category" required>
+                    <option value="">Select Category</option>
+                    <option value="kits">Kit</option>
+                    <option value="boots">Boots</option>
+                    <option value="other">Other</option>
+                </select>
+
+                <div id="kit-fields" class="category-fields">
+                    <input type="text" name="playerNumber" placeholder="Player Number">
+                    <input type="text" name="teamName" placeholder="Team Name">
+                </div>
+
+                <div id="boot-fields" class="category-fields">
+                    <input type="text" name="size" placeholder="Size">
+                    <input type="text" name="material" placeholder="Material">
+                </div>
+
+
+                <button type="submit">Add Product</button>
             </form>
         </div>
 
-        <!-- Existing Items Display -->
         <div class="items-container">
-            <h2>Existing Books</h2>
-            <div id="itemsList"></div>
-            <!-- Error message will be shown here if needed -->
-         </div>
+            <h2>All Products</h2>
+            <% products.forEach(product => { %>
+                <div class="product">
+                    <h3><%= product.name %></h3>
+                    <p><%= product.description %></p>
+                    <p>$<%= product.price %></p>
+                </div>
+            <% }) %>
+        </div>
     </div>
 
-    <script src="/static/script/admin.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const categorySelect = document.getElementById("category");
+            const kitFields = document.getElementById("kit-fields");
+            const bootFields = document.getElementById("boot-fields");
+
+            categorySelect.addEventListener("change", function () {
+                const selected = this.value;
+
+                kitFields.style.display = "none";
+                bootFields.style.display = "none";
+
+                if (selected === "kits") {
+                    kitFields.style.display = "block";
+                } else if (selected === "boots") {
+                    bootFields.style.display = "block";
+                }
+            });
+        });
+    </script>
 </body>
 </html>

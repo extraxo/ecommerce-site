@@ -24,6 +24,10 @@ const allothersSchema = new Schema({
         type: String,
         required: true,
     },
+    orderCount: {
+        type: Number,
+        default: 0
+      }
     
 });
 
