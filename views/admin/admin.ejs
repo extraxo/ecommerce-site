@@ -11,85 +11,82 @@
     </div>
 
     <div class="admin-container">
-        <div class="add-item-form">    
-        <h2>Add New Product</h2>
-        <form action="/admin/newproduct" method="POST">
-            <input type="text" name="name" placeholder="Product Name" required>
-            <input type="text" name="subtitle" placeholder="Subtitle" required>
-            <input type="text" name="slug" placeholder="Slug (e.g. nikemercurial)" required>
-            <input type="text" name="imageUrl" placeholder="Image URL" required>
-            <textarea name="description" placeholder="Short Description" rows="3" required></textarea>
-            <input type="number" name="price" placeholder="Price" step="0.01" required>
-            <textarea name="detailedDescription" placeholder="Detailed Description" rows="4"></textarea>
-            <textarea name="benefits" placeholder="Benefits (comma-separated)" rows="2"></textarea>
+        <div class="add-item-form">
+            <h2 id="form-title">Add New Product</h2>
+            
+            <form id="product-form" action="/admin/newproduct" method="POST" enctype="multipart/form-data">
+                <input type="hidden" id="edit-product-id" name="productId">
 
-            <select name="category" required>
-                <option value="">-- Select Category --</option>
-                <option value="kits">Kit</option>
-                <option value="boots">Boots</option>
-                <option value="other">Other</option>
-            </select>
+                <input type="text" name="name" placeholder="Product Name" required>
+                <input type="text" name="subtitle" placeholder="Subtitle" required>
+                <input type="text" name="slug" placeholder="Slug (e.g. nikemercurial)" required>
 
-            <div id="kitFields" class="category-fields hidden">
-                <h3>Kit Specific Fields</h3>
-                <div id="playersContainer">
-                    <h4>Players</h4>
-                    <button type="button" onclick="addPlayerField()">Add Player</button>
+                <div id="current-image"> <label for="image-input-id">Image File:</label> <input type="file" id="image-input-id" name="image" required/> </div>
+
+                <textarea name="description" placeholder="Short Description" rows="3" required></textarea>
+                <input type="number" name="price" placeholder="Price" step="0.01" required>
+                <textarea name="detailedDescription" placeholder="Detailed Description" rows="4"></textarea>
+                <textarea name="benefits" placeholder="Benefits (comma-separated)" rows="2"></textarea>
+
+                <select name="category" id="category-select-id" required> <option value="">-- Select Category --</option>
+                    <option value="kits">Kit</option>
+                    <option value="boots">Boots</option>
+                    <option value="other">Other</option>
+                </select>
+
+                <div id="kitFields" class="category-fields hidden">
+                    <h3>Kit Specific Fields</h3>
+                    <div id="playersContainer">
+                        <h4>Players</h4>
+                        <button type="button" onclick="addPlayerField()">Add Player</button>
+                    </div>
+                    <h4>Badge Options</h4>
+                    <label>
+                        <input type="checkbox" name="badgeAvailable" value="true">
+                        Badge Available
+                    </label>
+                    <input type="number" name="badgeAdditionalPrice" placeholder="Badge Additional Price" step="0.01">
                 </div>
-                <h4>Badge Options</h4>
-                <label>
-                    <input type="checkbox" name="badgeAvailable" value="true">
-                    Badge Available
-                </label>
-                <input type="number" name="badgeAdditionalPrice" placeholder="Badge Additional Price" step="0.01">
-            </div>
 
-            <button type="submit">Add Product</button>
-        </form>
+                <button id="form-submit" type="submit">Add Product</button>
+                </form>
         </div>
 
         <div class="items-container">
             <h2>All Products</h2>
             <% if (products && products.length > 0) { %>
                 <% products.forEach(product => { %>
-                    <div class="product" 
-                         data-id="<%= product._id %>" 
-                         data-name="<%= product.name %>"
-                         data-subtitle="<%= product.subtitle %>"
-                         data-slug="<%= product.slug %>"
-                         data-image="<%= product.image %>"
-                         data-description="<%= product.description %>"
-                         data-price="<%= product.price %>"
-                         data-category="<% 
-                             if (product.constructor.modelName === 'allkits') { %>kits<% } 
-                             else if (product.constructor.modelName === 'allboots') { %>boots<% } 
-                             else { %>other<% } %>">
-                         
+                    <div class="product">
                         <span class="product-category">
-                            <% if (product.constructor.modelName === 'allkits') { %>
-                                Kit
-                            <% } else if (product.constructor.modelName === 'allboots') { %>
-                                Boot
-                            <% } else { %>
-                                Other
-                            <% } %>
+                            <% if (product.constructor.modelName === 'allkits') { %>Kit<% }
+                               else if (product.constructor.modelName === 'allboots') { %>Boot<% }
+                               else { %>Other<% } %>
                         </span>
-
                         <h3><%= product.name %></h3>
                         <h4><%= product.subtitle %></h4>
                         <img src="<%= product.image %>" alt="<%= product.name %>" width="200">
                         <p><%= product.description %></p>
                         <p><strong>Price:</strong> $<%= product.price %></p>
                         <p><strong>Slug:</strong> <%= product.slug %></p>
+                        <p><strong>Count of Orders:</strong> <%= product.orderCount %></p>
 
                         <div class="product-actions">
-                            <form action="/admin/delete/<%= product._id %>" method="POST">
-                                <input type="hidden" name="category" value="<% 
-                                    if (product.constructor.modelName === 'allkits') { %>kits<% } 
-                                    else if (product.constructor.modelName === 'allboots') { %>boots<% } 
+                            <form action="/admin/delete/<%= product._id %>" method="POST" style="display: inline;">
+                                <input type="hidden" name="category" value="<%
+                                    if (product.constructor.modelName === 'allkits') { %>kits<% }
+                                    else if (product.constructor.modelName === 'allboots') { %>boots<% }
                                     else { %>other<% } %>">
                                 <button type="submit" class="delete-btn">Delete</button>
                             </form>
+
+                            <button type="button" class="edit-btn"
+                                    data-id="<%= product._id %>"
+                                    data-category="<%
+                                        if (product.constructor.modelName === 'allkits') { %>kits<% }
+                                        else if (product.constructor.modelName === 'allboots') { %>boots<% }
+                                        else { %>other<% } %>">
+                                Edit
+                            </button>
                         </div>
                     </div>
                 <% }) %>
@@ -98,33 +95,6 @@
             <% } %>
         </div>
     </div>
-
-    <script>
-        let playerIndex = 0;
-
-        function addPlayerField() {
-            const container = document.getElementById('playersContainer');
-            const div = document.createElement('div');
-            div.classList.add('player-entry');
-            div.innerHTML = `
-                <input type="text" name="players[${playerIndex}][name]" placeholder="Player Name" required>
-                <input type="number" name="players[${playerIndex}][number]" placeholder="Number" required>
-                <input type="number" name="players[${playerIndex}][additionalPrice]" placeholder="Extra Price" step="0.01" required>
-                <button type="button" onclick="this.parentElement.remove()">Remove</button>
-            `;
-            container.appendChild(div);
-            playerIndex++;
-        }
-
-        document.querySelector('select[name="category"]').addEventListener('change', function () {
-            document.querySelectorAll('.category-fields').forEach(el => el.classList.add('hidden'));
-
-            if (this.value === 'kits') {
-                document.getElementById('kitFields').classList.remove('hidden');
-            } else if (this.value === 'boots') {
-                document.getElementById('bootFields')?.classList.remove('hidden'); 
-            }
-        });
-    </script>
+    <script src = "/script/admin.js"></script>
 </body>
 </html>

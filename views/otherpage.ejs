@@ -37,27 +37,10 @@
 </div>
 
 <button class="add-to-cart"
-      onclick="addToCart('<%= other._id %>', '<%= other.name %>', '<%=other.sizes %>')">
+      onclick="addToCart('<%= other._id %>', '<%= other.name %>')">
     Add to Cart
     </button>
     <div class="forms-container">
-        <div class="purchase-form">
-          <h2>Purchase Form</h2>
-          <form id="purchase-form">
-            <div class="form-group">
-              <label for="name">Name:</label>
-              <input type="text" id="name" name="name" required>
-            </div>
-            
-            <div class="form-group">
-              <label for="address">Address</label>
-              <textarea id="address" name="address" rows="3" required></textarea>
-            </div>
-            
-            <button type="submit" class="form-submit">Send</button>
-          </form>
-        </div>
-  
         <div class="review-container"> 
           <h4>Leave a quick review:</h4>
           <form id="review-form" data-other-slug="<%= other.slug %>">
