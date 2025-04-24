@@ -54,7 +54,7 @@ function addToCart(id, name, price) {
       badgesInfo,
       basePrice,
       totalPrice,
-      quantity: 1
+      quantity: 1,
     });
   }
   

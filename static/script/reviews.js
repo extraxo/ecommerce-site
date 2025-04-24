@@ -10,7 +10,6 @@ document.addEventListener('DOMContentLoaded', () => {
             const ratingInput = document.getElementById('review-rating');
             const commentInput = document.getElementById('review-comment');
             
-            // Use a more generic property name that works for any product type
             const productSlug = reviewForm.dataset.productSlug || reviewForm.dataset.kitSlug || reviewForm.dataset.bootSlug; 
 
             if (!productSlug) {
@@ -28,7 +27,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 comment: commentInput ? commentInput.value.trim() : ''
             };
 
-            // Reset form message if it exists
             if (formMessage) {
                 formMessage.textContent = '';
                 formMessage.className = 'form-message';
@@ -82,11 +80,9 @@ function createReviewElement(review) {
     const div = document.createElement('div');
     div.classList.add('review-item');
     
-    // Use review._id if available, or use a timestamp as a fallback
     const reviewId = review._id || `new-${Date.now()}`;
     div.id = `review-${reviewId}`; 
 
-    // Use review.date or createdAt, with fallback to current date
     const reviewDate = new Date(review.date || review.createdAt || new Date()).toLocaleDateString('bg-BG', {
         year: 'numeric', month: 'long', day: 'numeric'
     });

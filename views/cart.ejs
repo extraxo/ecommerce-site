@@ -10,42 +10,42 @@
 <h2>Total: <span id="total-price">0</span> BGN</h2>
 
 <form id="order-form">
-    <h2>Your Details</h2> <%# Optional: Added heading %>
+    <h2>Your Details</h2>
 
-    <div class="form-group"> <%# Optional: Added wrapper div %>
-        <label for="customer-name">First Name:</label> <%# Optional: Added label %>
+    <div class="form-group"> 
+        <label for="customer-name">First Name:</label> 
         <input type="text"
                name="name"
-               id="customer-name" <%# ADD THIS ID %>
+               id="customer-name"
                placeholder="First Name" required>
     </div>
 
-    <div class="form-group"> <%# Optional: Added wrapper div %>
-       <label for="customer-surname">Last Name:</label> <%# Optional: Added label %>
+    <div class="form-group"> 
+       <label for="customer-surname">Last Name:</label> 
        <input type="text"
               name="surname"
-              id="customer-surname" <%# ADD THIS ID %>
+              id="customer-surname" 
               placeholder="Last Name" required>
     </div>
 
-     <div class="form-group"> <%# Optional: Added wrapper div %>
-        <label for="customer-email">Email:</label> <%# Optional: Added label %>
-        <input type="email" <%# Changed type to email for better validation %>
+     <div class="form-group"> 
+        <label for="customer-email">Email:</label>
+        <input type="email" 
                name="email"
-               id="customer-email" <%# ADD THIS ID %>
+               id="customer-email" 
                placeholder="Email" required>
     </div>
 
-    <div class="form-group"> <%# Optional: Added wrapper div %>
-        <label for="customer-address">Address:</label> <%# Optional: Added label %>
-        <textarea name="address" <%# Changed to textarea for address %>
-                  id="customer-address" <%# ADD THIS ID %>
+    <div class="form-group">
+        <label for="customer-address">Address:</label>
+        <textarea name="address" 
+                  id="customer-address" 
                   placeholder="Address" rows="3" required></textarea>
     </div>
 
     <div id="order-message" style="margin-top: 10px; font-weight: bold;"></div>
 
-    <button type="submit" id="submit-order-button">Finish Order</button> <%# Optional: Added ID to button %>
+    <button type="submit" id="submit-order-button">Finish Order</button> 
 </form>
 <script src="/script/cart.js"></script>
 <script src="/script/cartDisplay.js"></script>
