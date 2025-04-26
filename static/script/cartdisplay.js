@@ -35,8 +35,8 @@ function displayCartItems() {
               <div class="cart-item-details">
                 <h3>${item.name || 'Unnamed Item'}</h3>
                 <p>Size: ${item.size || 'N/A'}</p>
-                <p>Player: ${item.playerInfo || 'None'}</p>
-                <p>Badges: ${item.badgesInfo || 'None'}</p>
+                <p>Player: ${item.playerInfo || ''}</p>
+                <p>Badges: ${item.badgesInfo || ''}</p>
                 <p>Price: $${item.totalPrice ? item.totalPrice.toFixed(2) : 'N/A'} × ${quantity}</p>
                 <p>Item Total: $${itemTotal.toFixed(2)}</p>
               </div>

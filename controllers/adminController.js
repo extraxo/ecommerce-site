@@ -304,48 +304,62 @@ exports.updateProduct = asyncHandler(async (req, res) => {
 
 
 exports.submitOrder = asyncHandler(async (req, res) => {
-    
     try {
-          const { customer, items, totalAmount } = req.body;
-          
-          const newOrder = new Order({
+        const { customer, items, totalAmount } = req.body;
+
+        if (!customer || !items || items.length === 0 || !totalAmount) {
+            return res.status(400).json({ success: false, message: 'Missing required order data.' });
+        }
+
+        const newOrder = new Order({
             customerName: customer.name,
             customerSurname: customer.surname,
             customerEmail: customer.email,
             customerAddress: customer.address,
-            items: items,
+            items: items, 
             totalAmount: totalAmount,
             orderDate: new Date(),
             status: 'pending'
-          });
-            
-          await newOrder.save();
-    
-            for(const item of items){
-                let product;
-    
-                if(item.category === 'kits'){
-                    product = AllKits
-                }
-                else if(item.category === 'boots'){
-                    product = AllBoots
-                }
-                else if(item.category === 'other'){
-                    product = AllOthers
-                }
-    
-                if(product){
-    
-                    await product.findByIdAndUpdate(item.id, {$inc: { orderCount: item.quantity} }, {new: true});
-                }
+        });
+
+        await newOrder.save();
+
+        for (const item of items) {
+            let productModel;
+
+            if (item.category === 'kits') {
+                productModel = AllKits;
+            } else if (item.category === 'boots') {
+                productModel = AllBoots;
+            } else if (item.category === 'other') {
+                productModel = AllOthers;
+            } else {
+                console.warn(`Skipping order count update for item with potentially missing/invalid category: ${item.category}, slug: ${item.slug || 'N/A'}`);
+                continue;
             }
-    
-    
-            res.status(200).json({ success: true, message: 'Order submitted successfully' });
-        } catch (error) {
-            console.error(error);
-            res.status(500).json({ success: false, message: 'Error submitting order' });
+
+            if (productModel && item.slug) {
+                try {
+                    await productModel.findOneAndUpdate(
+                        { slug: item.slug },
+                        { $inc: { orderCount: item.quantity || 1 } }, 
+                    );
+                } catch (updateError) {
+                    console.error(`Error updating order count for product slug ${item.slug} in ${productModel.modelName}:`, updateError);
+                }
+            } else if (!item.slug) {
+                 console.warn(`Skipping order count update for item because slug is missing. Item ID: ${item.id || 'N/A'}`);
+            }
         }
-    
+
+        res.status(200).json({ success: true, message: 'Order submitted successfully' });
+
+    } catch (error) {
+        console.error("Error in submitOrder:", error);
+        if (res.headersSent) {
+            return;
+        }
+        res.status(500).json({ success: false, message: 'Error submitting order' });
+    }
 });
 
