@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
 
-    let playerIndex = 0;
+    window.playerIndex = 0;
     let currentEditingBaseId = null;
 
     function addPlayerField(playerData = null) {
@@ -8,16 +8,25 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!container) { console.error("playersContainer not found"); return; }
         const div = document.createElement('div');
         div.classList.add('player-entry');
-        const currentIndex = playerIndex++;
+        const currentIndex = window.playerIndex++;
         div.innerHTML = `
             <input type="text" name="players[${currentIndex}][name]" placeholder="Player Name" value="${playerData?.name || ''}" required>
             <input type="number" name="players[${currentIndex}][number]" placeholder="Number" value="${playerData?.number || ''}" required>
-            <input type="number" name="players[${currentIndex}][additionalPrice]" placeholder="Extra Price" step="0.01" value="${playerData?.additionalPrice || 0}" required>
+            <input type="number" name="players[${currentIndex}][additionalPrice]" placeholder="Additional Price" step="0.01" value="${playerData?.additionalPrice}" required>
             <button type="button" onclick="this.parentElement.remove()">Remove</button>
         `;
         const addButton = container.querySelector('button[onclick="addPlayerField()"]');
-         if (addButton) { container.insertBefore(div, addButton); } else { container.appendChild(div); }
+         if (addButton) 
+            { 
+                container.insertBefore(div, addButton); 
+            } 
+         else 
+         { 
+            container.appendChild(div); 
+        }
     }
+
+    window.addPlayerField = addPlayerField; 
 
     const categorySelect = document.getElementById("category-select-id");
     if (categorySelect) {
