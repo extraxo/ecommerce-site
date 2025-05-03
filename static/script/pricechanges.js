@@ -23,8 +23,6 @@ document.addEventListener("DOMContentLoaded", () => {
         let basePrice = getBasePrice();
         let playerCost = parseFloat(dropdown.value) || 0;
         let badgeCost = parseFloat(badgeDropdown.value) || 0;
-        console.log("Badge value:", badgeDropdown.value);
-        console.log("Parsed badge cost:", badgeCost);
         let finalPrice = basePrice + playerCost + badgeCost;
         totalPriceElement.innerText = `Total Price: ${finalPrice.toFixed(2)}$`;
     }

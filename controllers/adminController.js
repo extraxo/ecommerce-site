@@ -136,9 +136,7 @@ exports.deleteProduct = asyncHandler(async (req, res) => {
 exports.editProduct = asyncHandler(async (req, res) => {
     try {
         const productId = req.params.id;
-        const category = req.query.category; 
-
-        let productData = null;
+        const category = req.query.category;
         let baseProductModel;
         let detailedProductModel;
 
@@ -155,18 +153,24 @@ exports.editProduct = asyncHandler(async (req, res) => {
             return res.status(400).json({ message: "Invalid category specified." });
         }
 
-        const baseProduct = await baseProductModel.findById(productId);
+        const baseProduct = await baseProductModel.findById(productId).lean();
         if (!baseProduct) {
-             return res.status(404).json({ message: "Base product not found." });
+            return res.status(404).json({ message: "Base product not found." });
         }
 
-        productData = await detailedProductModel.findOne({ slug: baseProduct.slug });
+        const detailedProduct = await detailedProductModel.findOne({ slug: baseProduct.slug }).lean();
 
-        if (!productData) {
-             return res.status(404).json({ message: "Detailed product data not found." });
+        const combinedProductData = {
+            ...baseProduct,         
+            ...(detailedProduct || {}), 
+                                    
+            _id: baseProduct._id,    
+            slug: baseProduct.slug  
+        };
+        if (category === 'kits' && !combinedProductData.players) {
+            combinedProductData.players = [];
         }
-
-        res.json(productData);
+        res.json(combinedProductData);
 
     } catch (err) {
         console.error("Error fetching product JSON for edit:", err);
@@ -178,7 +182,6 @@ exports.updateProduct = asyncHandler(async (req, res) => {
     try {
 
         const productId = req.params.id;
-
         
         const {
             name,
@@ -200,10 +203,12 @@ exports.updateProduct = asyncHandler(async (req, res) => {
         if (category === "kits") {
             baseProductModel = AllKits;
             detailedProductModel = Kit;
-        } else if (category === "boots") {
+        } 
+        else if (category === "boots") {
             baseProductModel = AllBoots;
             detailedProductModel = Boot;
-        } else if (category === "other") {
+        } 
+        else if (category === "other") {
             baseProductModel = AllOthers;
             detailedProductModel = Other;
         } else {
@@ -242,31 +247,31 @@ exports.updateProduct = asyncHandler(async (req, res) => {
         }
 
         if (category === "kits") {
-            detailedUpdateData.players = [];
-             if (req.body.players && typeof req.body.players === 'object') {
-                 const playerMap = {};
-                 for (const key in req.body) {
-                     const match = key.match(/^players\[(\d+)\]\[(name|number|additionalPrice)\]$/);
-                     if (match) {
-                         const index = match[1];
-                         const field = match[2];
-                         if (!playerMap[index]) playerMap[index] = {};
-                         playerMap[index][field] = req.body[key];
-                     }
-                 }
-                 detailedUpdateData.players = Object.values(playerMap)
-                     .filter(p => p.name || p.number || p.additionalPrice) 
-                     .map(p => ({
-                         name: p.name || '', 
-                         number: parseInt(p.number || 0), 
-                         additionalPrice: parseFloat(p.additionalPrice || 0) 
-                     }));
+            detailedUpdateData.players = []; 
+            const playersData = req.body.players; 
+
+            if (playersData) { 
+                let playersArray = [];
+                if (Array.isArray(playersData)) {
+                    playersArray = playersData;
+                } else if (typeof playersData === 'object' && playersData !== null) {
+                    playersArray = Object.values(playersData);
+                }
+
+                if (playersArray.length > 0) {
+                    detailedUpdateData.players = playersArray
+                        .filter(p => p && (p.name || p.number || p.additionalPrice)) 
+                        .map(p => ({
+                            name: p.name || '',
+                            number: parseInt(p.number || 0),
+                            additionalPrice: parseFloat(p.additionalPrice || 0)
+                        }));
+                }
             }
-
-
+            
             detailedUpdateData.badgeOptions = {
                 available: req.body.badgeAvailable === 'true',
-                additionalPrice: parseFloat(req.body.badgeAdditionalPrice || 0) 
+                additionalPrice: parseFloat(req.body.badgeAdditionalPrice || 0)
             };
         }
 
@@ -285,7 +290,6 @@ exports.updateProduct = asyncHandler(async (req, res) => {
             return res.status(404).send("Could not find one or both product documents to update.");
         }
         res.status(200).json({ success: true, message: "Product updated successfully!" });
-        res.redirect('/admin');
 
     } catch (err) {
         console.error("Error updating product:", err); 
